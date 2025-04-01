@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ResidentController extends Controller
+class StaffController extends Controller
 {
     function index()
     {
-        return view("resident.dashboard");
+        return view("staff.dashboard");
     }
 }

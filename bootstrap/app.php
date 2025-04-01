@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Middleware\ResidentMiddleware;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\SecurityMiddleware;
+use App\Http\Middleware\StaffMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,7 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(
             [
-                'ResidentMiddleware'=>ResidentMiddleware::class
+                'ResidentMiddleware'=>ResidentMiddleware::class,
+                'AdminMiddleware'=>AdminMiddleware::class,
+                'SecurityMiddleware'=>SecurityMiddleware::class,
+                'StaffMiddleware'=>StaffMiddleware::class,
             ]
             );
     })

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('usertype')->default('Resident');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->dateTime('DOB')->default('1900-01-01');
+            $table->string('phone_number',10)->default('999999999');
             $table->rememberToken();
             $table->timestamps();
         });

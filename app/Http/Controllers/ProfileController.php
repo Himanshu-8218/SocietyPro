@@ -36,6 +36,19 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+    /**
+     * Update the user's contact details.
+     */
+    // public function contactupdate(ProfileUpdateRequest $request)
+    // {
+    //     return "user";
+    //     // $request->user()->fill($request->validated());
+    //     // $request->user->save();
+    //     // return Redirect::route('profile.edit')->with('status', 'contact-updated');
+    
+    // }
+
+    
 
     /**
      * Delete the user's account.

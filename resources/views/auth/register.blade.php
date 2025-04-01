@@ -16,14 +16,18 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="mt-3">
-            <label for="role">Select Role</label>
-            <select name="role" class="form-control" required>
+        <div >
+            {{-- <label for="role">Select Role</label> --}}
+            <x-input-label for="Role" :value="__('Role')" />
+            <select name="role" class="text-gray-700 mt-1 w-full form-select form-select-lg mb-3" style="color: #eeeaea;
+    background-color: rgb(17 24 39);
+    border-radius: 4px;" required>
                 <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
                 <option value="Resident" {{ old('role', 'Resident') == 'Resident' ? 'selected' : '' }}>Resident</option>
                 <option value="Security" {{ old('role') == 'Security' ? 'selected' : '' }}>Security</option>
                 <option value="Staff" {{ old('role') == 'Staff' ? 'selected' : '' }}>Staff</option>
             </select>
+            <x-input-error :messages="$errors->get('Role')" class="mt-2" />
         </div>
 
         <!-- Password -->
