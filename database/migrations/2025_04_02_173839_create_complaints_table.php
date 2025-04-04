@@ -9,23 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+        // database/migrations/create_complaints_table.php
+
     public function up()
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('complaints', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('floor_id')->constrained('floors')->onDelete('cascade');
-            $table->string('unit_number');
-            $table->enum('status', ['Available', 'Occupied'])->default('Available');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->text('description');
+            $table->enum('status', ['Pending', 'In Progress', 'Resolved'])->default('Pending');
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('complaints');
     }
 };

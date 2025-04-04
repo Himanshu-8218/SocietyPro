@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('admin/register') }}">
         @csrf
 
         <!-- Name -->
@@ -18,16 +18,17 @@
 
         <div >
             {{-- <label for="role">Select Role</label> --}}
-            <x-input-label for="Role" :value="__('Role')" />
-            <select name="role" class="text-gray-700 mt-1 w-full form-select form-select-lg mb-3" style="color: #eeeaea;
+            {{-- <x-input-label for="Role" value='Staff' type="hidden" /> --}}
+            <input type="hidden" name="role" id="role" value="Staff">
+            {{-- <select name="role" class="text-gray-700 mt-1 w-full form-select form-select-lg mb-3" style="color: #eeeaea;
     background-color: rgb(17 24 39);
     border-radius: 4px;" required>
                 <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
                 <option value="Resident" {{ old('role', 'Resident') == 'Resident' ? 'selected' : '' }}>Resident</option>
                 {{-- <option value="Security" {{ old('role') == 'Security' ? 'selected' : '' }}>Security</option>
-                <option value="Staff" {{ old('role') == 'Staff' ? 'selected' : '' }}>Staff</option> --}}
-            </select>
-            <x-input-error :messages="$errors->get('Role')" class="mt-2" />
+                <option value="Staff" {{ old('role') == 'Staff' ? 'selected' : '' }}>Staff</option> 
+            </select> 
+            --}}
         </div>
 
         <!-- Password -->
@@ -54,13 +55,12 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('admin/dashboard') }}">
+            {{ __('Back to Dashboard') }}
+        </a>
     </form>
 </x-guest-layout>

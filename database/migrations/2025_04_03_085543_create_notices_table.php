@@ -9,23 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('floor_id')->constrained('floors')->onDelete('cascade');
-            $table->string('unit_number');
-            $table->enum('status', ['Available', 'Occupied'])->default('Available');
+            $table->string('title');
+            $table->text('content');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Admin ID
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('notices');
     }
 };
