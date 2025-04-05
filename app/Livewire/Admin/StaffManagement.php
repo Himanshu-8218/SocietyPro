@@ -4,24 +4,59 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
-// use Livewire\WithPagination;
+
 class StaffManagement extends Component
 {
-    // use WithPagination;
+    public $users;
+    public $editUserId = null;
+    public $name;
+    public $email;
+
+    public function mount()
+    {
+        $this->loadUsers();
+    }
+
+    public function loadUsers()
+    {
+        $this->users = User::whereIn('usertype', ['Security', 'Staff'])->get();
+    }
+
     public function render()
     {
-        $users = User::whereIn('usertype',['Security','Staff'])->get(); 
-        // dd($users); 
-        return view('livewire.admin.staff-management', ['users' => $users]);
+        return view('livewire.admin.staff-management');
     }
 
-    // Method to handle editing staff
     public function edit($id)
     {
-        // $users=User::all();
-        // return view('livewire.admin.staff-management', ['users' => $users]);
+        $user = User::find($id);
+        if ($user) {
+            $this->editUserId = $id;
+            $this->name = $user->name;
+            $this->email = $user->email;
+        }
     }
 
+    public function update()
+    {
+        $user = User::find($this->editUserId);
+        if ($user) {
+            $user->name = $this->name;
+            $user->email = $this->email;
+            $user->save();
+            session()->flash('message', 'User updated successfully!');
+        }
+
+        $this->cancelEdit(); // reset fields
+        $this->loadUsers();  // reload updated data
+    }
+
+    public function cancelEdit()
+    {
+        $this->editUserId = null;
+        $this->name = '';
+        $this->email = '';
+    }
 
     public function delete_staff($id)
     {
@@ -29,11 +64,7 @@ class StaffManagement extends Component
         if ($user) {
             $user->delete();
             session()->flash('message', 'User deleted successfully!');
-        } else {
-            session()->flash('error', 'User not found.');
+            $this->loadUsers();
         }
-
-        // Optionally, redirect after action
-        return redirect()->route('admin/dashboard');  // Adjust the route as needed
     }
 }

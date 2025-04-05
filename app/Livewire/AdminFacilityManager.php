@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class AdminFacilityManager extends Component
 {
-    public $name, $total_slots;
+    public $name, $total_slots,$description;
     public $facilities;
 
     public function mount()
@@ -24,15 +24,17 @@ class AdminFacilityManager extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'total_slots' => 'required|integer|min:1',
+            'description'=>'required|string|min:10',
         ]);
 
         Facility::create([
             'name' => $this->name,
             'total_slots' => $this->total_slots,
+            'description'=>$this->description,
         ]);
 
         session()->flash('message', 'Facility added successfully!');
-        $this->reset(['name', 'total_slots']);
+        $this->reset(['name', 'total_slots','description']);
         $this->fetchFacilities();
     }
     public function render()

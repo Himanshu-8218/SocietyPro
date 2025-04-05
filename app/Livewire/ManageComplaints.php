@@ -41,9 +41,9 @@ class ManageComplaints extends Component
         return;
     }
 
-    $message = "Your complaint status has been updated to: " . $complaint->status;
+    $message = "Your complaint : ".$complaint->description ." status has been updated to: " . $complaint->status;
     $complaint->user->notify(new \App\Notifications\ComplaintStatusUpdated($message));
-}
+    }
     public function render()
     {
         return view('livewire.manage-complaints');

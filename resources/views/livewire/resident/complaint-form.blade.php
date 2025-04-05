@@ -1,19 +1,33 @@
 <div>
-    <h2>All Notifications</h2>
+    <strong><h1>All Notifications</h1></strong>
+    <br/>
+    @if($notifications->count()==0)
+    <div class="alert alert-info">
+        <h3>No Notification</h3>
+    </div>       
+    @endif
     @foreach ($notifications as $notification)
-        <h1>{{ $notification->data['message'] }}</h1>
+    <div class="alert alert-secondary">
+        {{-- <strong>{{ $notification->data['title'] }}</strong> --}}
+        <strong>{{ $notification->data['message'] }}</strong>
+    </div>
     @endforeach
-
-    <h2>Unread Notifications</h2>
+    <br/>
+    <strong><h1>Unread Notifications</h1></strong>
+    <br/>
     @if($unreads->count()==0)
         <div class="alert alert-info">
             <h3>No Unread Notification</h3>
         </div>       
     @endif
     @foreach ($unreads as $notification)
-        <h1>{{ $notification->data['message'] }}</h1>
+    <div class="alert alert-secondary">
+        {{-- <strong>{{ $notification->data['title'] }}</strong> --}}
+        <strong>{{ $notification->data['message'] }}</strong>
+        <br/>
         <button class="btn btn-sm btn-success" wire:click="markAsRead('{{ $notification->id }}')">
             Mark as Read
         </button>
+    </div>
     @endforeach
 </div>

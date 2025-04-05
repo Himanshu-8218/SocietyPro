@@ -9,16 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::create('floors', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('building_id')->constrained('buildings')->onDelete('cascade');
-        $table->integer('floor_number');
-        $table->timestamps();
-    });
-}
-
+    public function up(): void
+    {
+        Schema::create('floors', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('building_id')->constrained()->onDelete('cascade');
+            $table->integer('number');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

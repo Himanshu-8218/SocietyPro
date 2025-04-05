@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
+    protected $fillable = ['floor_id', 'unit_number', 'status', 'resident_id'];
+
     public function floor()
     {
         return $this->belongsTo(Floor::class);
@@ -13,6 +15,6 @@ class Unit extends Model
 
     public function resident()
     {
-        return $this->hasOne(Resident::class);
+        return $this->belongsTo(User::class, 'resident_id');
     }
 }

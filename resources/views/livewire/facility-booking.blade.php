@@ -1,53 +1,62 @@
-<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
-    <h2 class="text-2xl font-semibold mb-4">Book a Facility</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Facilities</h2>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 text-green-700 p-2 rounded mb-4">
-            {{ session('message') }}
-        </div>
+        <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
     @if (session()->has('error'))
-        <div class="bg-red-100 text-red-700 p-2 rounded mb-4">
-            {{ session('error') }}
-        </div>
+    <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form wire:submit.prevent="book">
-        <div class="mb-4">
-            <label class="block font-medium">Select Facility</label>
-            <select wire:model="facility_id" class="w-full border rounded p-2">
-                <option value="">-- Choose --</option>
-                @foreach ($facilities as $facility)
-                    <option value="{{ $facility->id }}">{{ $facility->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        
 
-        <div class="mb-4">
-            <label class="block font-medium">Date</label>
-            <input type="date" wire:model="date" class="w-full border rounded p-2">
-        </div>
+    <div class="list-group">
+        @foreach ($facilities as $facility)
+            <div class="list-group-item mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ $facility->name }}</strong>
+                    <button 
+                        class="btn btn-sm btn-primary"
+                        wire:click="openFacility({{ $facility->id }})"
+                    >
+                        Add
+                    </button>
+                </div>
 
-        @if ($facility_id && $date)
-        <div class="mb-4 p-3 bg-gray-100 rounded">
-            <p><strong>Total Slots:</strong> {{ $occupiedSlots + $availableSlots }}</p>
-            <p><strong>Occupied:</strong> {{ $occupiedSlots }}</p>
-            <p><strong>Available:</strong> {{ $availableSlots }}</p>
-        </div>
-        @endif
+                @if ($selectedFacility && $selectedFacility->id === $facility->id)
+                    <div class="mt-3 border-top pt-3">
+                        <div class="mb-3">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" wire:model="date" class="form-control">
+                        </div>
 
-        <div class="mb-4">
-            <label class="block font-medium">Start Time</label>
-            <input type="time" wire:model="start_time" class="w-full border rounded p-2">
-        </div>
+                            <div class="alert alert-info">
+                                <p><strong>Total Slots:</strong> {{ $facility->total_slots}}</p>
+                                {{-- <p><strong>Occupied:</strong> {{ $occupiedSlots }}</p> --}}
+                                <p><strong>Available:</strong> {{ $facility->occupied }}</p>
+                            </div>
 
-        <div class="mb-4">
-            <label class="block font-medium">End Time</label>
-            <input type="time" wire:model="end_time" class="w-full border rounded p-2">
-        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Start Time</label>
+                            <input type="time" wire:model="start_time" class="form-control">
+                        </div>
 
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Book Now</button>
-    </form>
+                        <div class="mb-3">
+                            <label class="form-label">End Time</label>
+                            <input type="time" wire:model="end_time" class="form-control">
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            @if ($facility->total_slots >$facility->occupied)
+                                <button wire:click="submitBooking" class="btn btn-success">Apply</button>
+                            @else
+                                <button type="button" class="btn btn-danger" disabled>Not Enough Slot</button>
+                            @endif
+                            <button wire:click="cancelSelection" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        @endforeach
+    </div>
 </div>

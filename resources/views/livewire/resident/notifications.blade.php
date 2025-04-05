@@ -1,6 +1,7 @@
 <div>
-    <h2>Notifications</h2>
-
+    <strong><h1>Notifications</h1></strong>
+    <br/>
+    <br/>
     <h4>Unread Notifications</h4>
     @if($unreadNotifications->count()==0)
         <div class="alert alert-info">

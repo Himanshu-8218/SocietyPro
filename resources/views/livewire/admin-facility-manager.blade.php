@@ -13,6 +13,11 @@
             <input type="text" wire:model="name" class="w-full border rounded p-2" placeholder="e.g. Clubhouse">
             @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
+        <div class="mb-4">
+            <label class="block font-medium">Description</label>
+            <input type="text" wire:model="description" class="w-full border rounded p-2" placeholder="e.g. Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias id, optio, assumenda aspernatur">
+            @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
 
         <div class="mb-4">
             <label class="block font-medium">Total Slots</label>
@@ -28,6 +33,7 @@
         <thead>
             <tr class="bg-gray-100 text-left">
                 <th class="px-4 py-2 border">Name</th>
+                <th class="px-4 py-2 border">Description</th>
                 <th class="px-4 py-2 border">Total Slots</th>
             </tr>
         </thead>
@@ -35,6 +41,7 @@
             @foreach ($facilities as $facility)
                 <tr>
                     <td class="px-4 py-2 border">{{ $facility->name }}</td>
+                    <td class="px-4 py-2 border">{{ $facility->description }}</td>
                     <td class="px-4 py-2 border">{{ $facility->total_slots }}</td>
                 </tr>
             @endforeach

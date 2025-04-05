@@ -24,6 +24,16 @@ class User extends Authenticatable
         'usertype'
     ];
 
+    public function residents()
+    {
+        return $this->hasMany(Resident::class);
+    }
+
+    public function ownedUnits()
+    {
+        return $this->hasManyThrough(Unit::class, Resident::class, 'user_id', 'id', 'id', 'unit_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

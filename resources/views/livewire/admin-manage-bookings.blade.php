@@ -21,10 +21,8 @@
                     <td class="px-4 py-2 border">{{ $booking->start_time }} - {{ $booking->end_time }}</td>
                     <td class="px-4 py-2 border capitalize">{{ $booking->status }}</td>
                     <td class="px-4 py-2 border">
-                        @if ($booking->status !== 'approved')
+                        @if ($booking->status === 'pending')
                             <button wire:click="updateStatus({{ $booking->id }}, 'approved')" class="bg-green-500 text-black px-2 py-1 rounded">Approve</button>
-                        @endif
-                        @if ($booking->status !== 'cancelled')
                             <button wire:click="updateStatus({{ $booking->id }}, 'cancelled')" class="bg-red-500 text-black px-2 py-1 rounded">Cancel</button>
                         @endif
                     </td>

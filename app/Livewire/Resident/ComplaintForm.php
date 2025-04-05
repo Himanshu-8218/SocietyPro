@@ -19,8 +19,9 @@ class ComplaintForm extends Component
         $user = Auth::user();
         // dd($user);
         // Fetch notifications
-        $this->unreads = $user->unreadNotifications->where('type','App\Notifications\ComplaintStatusUpdate');
-        $this->notifications = $user->notifications->where('type','App\Notifications\ComplaintStatusUpdate');
+        $this->unreads = $user->unreadNotifications->where('type','App\Notifications\ComplaintStatusUpdated');
+        $this->notifications = $user->notifications->where('type','App\Notifications\ComplaintStatusUpdated');
+        // dd($this->notifications);
     }
 
     public function markAsRead($id)

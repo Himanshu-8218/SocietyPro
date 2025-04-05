@@ -1,6 +1,7 @@
 
 <div>
-    <h2>Manage Complaints</h2>
+    <strong><h1>Manage Complaints</h1></strong>
+    <br/>
     <table class="table">
         <thead>
             <tr>
@@ -15,11 +16,13 @@
                 <td>{{ $complaint->description }}</td>
                 <td>{{ $complaint->status }}</td>
                 <td>
+                    @if($complaint->status!="Resolved")
                     <select wire:model="status" class="form-control" wire:change="updateStatus({{ $complaint->id }})">
                         <option value="Pending">Pending</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Resolved">Resolved</option>
                     </select>
+                    @endif
                         
                 </td>
             </tr>

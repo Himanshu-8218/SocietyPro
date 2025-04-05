@@ -9,6 +9,7 @@ class Facility extends Model
     protected $fillable = [
         'name',
         'total_slots',
+        'description',
     ];
 
     public function bookings()

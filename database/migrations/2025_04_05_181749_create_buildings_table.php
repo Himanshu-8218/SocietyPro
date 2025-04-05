@@ -9,14 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
+            // database/migrations/xxxx_xx_xx_create_buildings_table.php
     Schema::create('buildings', function (Blueprint $table) {
         $table->id();
         $table->string('name');
         $table->string('address');
         $table->timestamps();
     });
+
     }
 
     /**

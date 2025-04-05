@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('facilities', function (Blueprint $table) {
-            $table->integer('total_slots')->default(10);
+        Schema::create('residents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('facilities', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('residents');
     }
 };

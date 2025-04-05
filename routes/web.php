@@ -9,8 +9,9 @@ use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\Admin\StaffManagement;
-use App\Http\Livewire\ComplaintForm;
-use App\Http\Livewire\ManageComplaints;
+use App\Http\Livewire\Admin\FloorForm;
+use App\Http\Livewire\Admin\BuildingForm;
+use App\Http\Livewire\Admin\UnitForm;
 use App\Livewire\Admin\NoticeBoard;
 
 use App\Livewire\BillingComponent;
@@ -46,6 +47,8 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'ResidentMiddleware'])->group(function () {
     Route::get('/dashboard', [ResidentController::class, 'index'])->name('dashboard');
+    Route::view('/notice-board', 'resident.notice-board')->name('/notice-board');
+    Route::view('/complaint-board', 'resident.complaint-board')->name('/complaint-board');
     // Route::get('/complaints', ComplaintForm::class)->name('complaints.form');
 });
 
@@ -57,6 +60,12 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::post('admin/register', [RegisteredUserController::class, 'store_admin']);
     Route::view('admin/notice-board', 'admin.notice-board')->name('admin/notice-board');
     Route::view('admin/staff-management', 'admin.staff-management')->name('admin/staff-management');
+    Route::view('admin/complaint-board', 'admin.complaint-board')->name('admin/complaint-board');
+    Route::view('admin/facility/view', 'admin.facility')->name('admin/facility/view');
+
+    // Route::get('admin/buildings', BuildingForm::class)->name('admin/buildings');
+    // Route::get('admin/floors', FloorForm::class)->name('admin/floors');
+    // Route::get('admin/units', UnitForm::class)->name('admin/units');
 
     
     // Only admins or maintenance can access this

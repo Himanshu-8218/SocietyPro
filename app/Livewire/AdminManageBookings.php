@@ -16,6 +16,15 @@ class AdminManageBookings extends Component
     public function updateStatus($id, $status)
     {
         $booking = Booking::findOrFail($id);
+        if($status=="approved")
+        {
+            $booking->facility->occupied;
+        }
+        else
+        {
+        $booking->facility->occupied--;    
+        $booking->facility->save();
+        }
         $booking->status = $status;
         $booking->save();
         $this->mount();
