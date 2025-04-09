@@ -4,4 +4,7 @@
 <br/>
 <br/>
 <livewire:resident-property-list/>
+<br/>
+<br/>
+{{-- <livewire:resident-pay-bill/> --}}
 </div>

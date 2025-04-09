@@ -1,4 +1,6 @@
-@include('nav')
+@include('staff.staff-nav')
 <div style="width: 87%; margin-left: 7%;">
-<livewire:admin.notice-board/>
+<livewire:staff-tasks/>
+<br/>
+<livewire:staff-schedule-view/>
 </div>

@@ -1,6 +1,12 @@
 <div class="container">
+    @if (session()->has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <form wire:submit.prevent="save">
-        <select wire:model="floor_id" required>
+        <select wire:model.defer="floor_id" required>
             <option value="">Select Floor</option>
             @foreach($floors as $floor)
                 <option value="{{ $floor->id }}">
@@ -9,7 +15,7 @@
             @endforeach
         </select>
 
-        <input type="text" wire:model="unit_number" placeholder="Unit Number" required>
+        <input type="text" wire:model.defer="unit_number" placeholder="Unit Number" required>
         <select wire:model="status">
             <option value="available">Available</option>
             <option value="occupied">Occupied</option>

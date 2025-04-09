@@ -4,22 +4,26 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SecurityController;
-use App\Http\Controllers\SocietyController;
+use App\Http\Controllers\FinancialChart;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\Admin\StaffManagement;
-use App\Http\Livewire\Admin\FloorForm;
-use App\Http\Livewire\Admin\BuildingForm;
-use App\Http\Livewire\Admin\UnitForm;
+use App\Livewire\Admin\FloorForm;
+use App\Livewire\Admin\BuildingForm;
+use App\Livewire\Admin\UnitForm;
 use App\Livewire\Admin\NoticeBoard;
 
 use App\Livewire\BillingComponent;
 
 use App\Http\Controllers\PaymentController;
 
-Route::get('/billing/success/{billId}', [PaymentController::class, 'success'])->name('billing.success');
-Route::get('/billing/cancel', [PaymentController::class, 'cancel'])->name('billing.cancel');
+Route::get('/resident/payment-success/{billId}', [PaymentController::class, 'paymentSuccess'])->name('/paymentSuccess');
+Route::get('/resident/payment-cancel/{billId}', [PaymentController::class, 'paymentCancel'])->name('/paymentCancel');
+
+// Route for downloading invoice
+Route::get('/resident/download-invoice/{billId}', [PaymentController::class, 'downloadInvoice'])->name('resident.downloadInvoice');
+
 
 
 
@@ -31,6 +35,8 @@ Route::get('/users',[StaffManagement::class,'render']);
 Route::get('/', function () {
     return view('auth.register');
 });
+
+
 
 // Route::get('/dashboard', function () {
 //     return view('resident.dashboard');
@@ -49,6 +55,10 @@ Route::middleware(['auth', 'ResidentMiddleware'])->group(function () {
     Route::get('/dashboard', [ResidentController::class, 'index'])->name('dashboard');
     Route::view('/notice-board', 'resident.notice-board')->name('/notice-board');
     Route::view('/complaint-board', 'resident.complaint-board')->name('/complaint-board');
+    Route::get('/payment/success', [App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('/invoice/download/{id}', [PaymentController::class, 'downloadInvoice'])->name('invoice.download');
+    
     // Route::get('/complaints', ComplaintForm::class)->name('complaints.form');
 });
 
@@ -63,13 +73,11 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::view('admin/complaint-board', 'admin.complaint-board')->name('admin/complaint-board');
     Route::view('admin/facility/view', 'admin.facility')->name('admin/facility/view');
 
-    // Route::get('admin/buildings', BuildingForm::class)->name('admin/buildings');
-    // Route::get('admin/floors', FloorForm::class)->name('admin/floors');
-    // Route::get('admin/units', UnitForm::class)->name('admin/units');
+    Route::view('admin/buildings', 'admin.buildings')->name('admin/buildings');
+    Route::view('admin/floors', 'admin.floors')->name('admin/floors');
+    Route::view('admin/units', 'admin.units')->name('admin/units');
 
-    
-    // Only admins or maintenance can access this
-    // Route::get('/admin/complaints', ManageComplaints::class)->name('admin.complaints');
+
 });
 
 Route::middleware(['auth', 'StaffMiddleware'])->group(function () {

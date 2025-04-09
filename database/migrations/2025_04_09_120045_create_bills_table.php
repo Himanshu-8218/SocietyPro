@@ -9,19 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-        public function up()
-        {
+    public function up(): void
+    {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('resident_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 10, 2);
-            $table->date('due_date');
-            $table->enum('status', ['pending', 'paid'])->default('pending');
-            $table->string('transaction_id')->nullable();
+            $table->date('billing_date');
+            $table->enum('status', ['due', 'paid'])->default('due');
             $table->timestamps();
         });
-        }
-
+    }
 
     /**
      * Reverse the migrations.

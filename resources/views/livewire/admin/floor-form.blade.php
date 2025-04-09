@@ -1,4 +1,10 @@
 <div class="container">
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <form wire:submit.prevent="save">
         <select wire:model="building_id" required>
             <option value="">Select Building</option>
@@ -6,8 +12,8 @@
                 <option value="{{ $building->id }}">{{ $building->name }}</option>
             @endforeach
         </select>
-        <input type="number" wire:model="number" placeholder="Floor Number" required>
-        <button type="submit">{{ $floor_id ? 'Update' : 'Add' }} Floor</button>
+        <input type="number" wire:model.defer="number" placeholder="Floor Number" required>
+        <button type="save">{{ $floor_id ? 'Update' : 'Add' }} Floor</button>
     </form>
 
     <table>
