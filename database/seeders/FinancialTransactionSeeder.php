@@ -10,7 +10,7 @@ class FinancialTransactionSeeder extends Seeder
 {
     public function run()
     {
-        $sources = ['maintenance', 'facility_booking', 'Staff Payment', 'Celebration'];
+        $sources = ['maintenance', 'facility_booking'];
 
         foreach (range(1, 100) as $index) {
             FinancialTransaction::create([

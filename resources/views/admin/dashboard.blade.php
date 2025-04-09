@@ -59,12 +59,10 @@
         </div>
         
         
-        {{-- main Content --}}
-        {{-- <livewire:financial-report /> --}}
-        {{-- <livewire:monthly-financial-chart/> --}}
-        {{-- <livewire:yearly-financial-chart/> --}}
-        {{-- <h1>Hello</h1> --}}
+        
     </div>
+    <livewire:financial-reports/>
+    <br/>
     <livewire:admin.billing-manager/>
     <br/>
     <livewire:admin.staff-schedule/>

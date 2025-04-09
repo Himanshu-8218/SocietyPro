@@ -18,11 +18,11 @@ use App\Livewire\BillingComponent;
 
 use App\Http\Controllers\PaymentController;
 
-Route::get('/resident/payment-success/{billId}', [PaymentController::class, 'paymentSuccess'])->name('/paymentSuccess');
-Route::get('/resident/payment-cancel/{billId}', [PaymentController::class, 'paymentCancel'])->name('/paymentCancel');
+// Route::get('/resident/payment-success/{billId}', [PaymentController::class, 'paymentSuccess'])->name('/paymentSuccess');
+// Route::get('/resident/payment-cancel/{billId}', [PaymentController::class, 'paymentCancel'])->name('/paymentCancel');
 
-// Route for downloading invoice
-Route::get('/resident/download-invoice/{billId}', [PaymentController::class, 'downloadInvoice'])->name('resident.downloadInvoice');
+// // Route for downloading invoice
+// Route::get('/resident/download-invoice/{billId}', [PaymentController::class, 'downloadInvoice'])->name('resident.downloadInvoice');
 
 
 
