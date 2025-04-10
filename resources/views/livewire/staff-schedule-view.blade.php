@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h4 class="mb-4">My Shift Schedule</h4>
+    <strong class="mb-6 fs-2">My Shift Schedule</strong>
 
     @if($shifts->count() > 0)
         <table class="table table-bordered table-striped">

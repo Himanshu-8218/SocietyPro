@@ -10,7 +10,7 @@ class Visitor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'contact', 'purpose', 'status', 'resident_id', 'approved_by'
+        'name', 'contact', 'purpose', 'status', 'resident_id', 'approved_by','date'
     ];
 
     public function resident()

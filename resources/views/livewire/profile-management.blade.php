@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <div class="container mt-5">
         @if (session()->has('message'))
             <div class="alert alert-success">{{ session('message') }}</div>

@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class VisitorManagement extends Component
 {
-    public $name, $contact, $purpose;
+    public $name, $contact, $purpose,$date;
     public $visitors;
 
     public function mount()
@@ -22,6 +22,7 @@ class VisitorManagement extends Component
         'name' => 'required|string|max:255',
         'contact' => 'required|string|max:15',
         'purpose' => 'required|string|max:255',
+        'date'=>'required',
     ]);
 
     $status = (Auth::user()->usertype == 'Security') ? 'approved' : 'pending';
@@ -31,6 +32,7 @@ class VisitorManagement extends Component
         'contact' => $this->contact,
         'purpose' => $this->purpose,
         'resident_id' => Auth::id(),
+        'date'=>$this->date,
         'status' => $status,
         'approved_by' => (Auth::user()->role == 'security') ? Auth::id() : null,
     ]);

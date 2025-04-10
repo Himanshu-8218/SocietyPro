@@ -1,6 +1,11 @@
 <div class="container">
     <div class="card p-4 shadow-sm">
-        <h2 class="mb-4">Mark Attendance</h2>
+        @if (session()->has('message'))
+        <div class="alert alert-success mt-3">
+            {{ session('message') }}
+        </div>
+    @endif
+        <strong class="mb-4 fs-2">Mark Attendance</strong>
 
         <div class="mb-3">
             <label for="date" class="form-label">Select Date:</label>
@@ -38,11 +43,7 @@
             <button type="submit" class="btn btn-primary">Save Attendance</button>
         </form>
 
-        @if (session()->has('message'))
-            <div class="alert alert-success mt-3">
-                {{ session('message') }}
-            </div>
-        @endif
+
     </div>
 
 </div>

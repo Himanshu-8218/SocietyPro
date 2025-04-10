@@ -1,8 +1,7 @@
 @include('admin.admin-nav')
 <div style="width: 87%; margin-left: 7%; margin-top: 5rem;">
-    <livewire:admin.staff-management/>
+    <livewire:attendance-manager/>
     <br/>
-    <livewire:admin.staff-schedule/>
+    <livewire:attendance-report/>
     <br/>
-    <livewire:task-assignment/>
 </div>

@@ -1,9 +1,9 @@
 <div>
-    <div class="row">
-        <div class="col-md-6 mb-4"><div id="monthly_chart" style="height: 400px;"></div></div>
-        <div class="col-md-6 mb-4"><div id="quarterly_chart" style="height: 400px;"></div></div>
-        <div class="col-md-6 mb-4"><div id="yearly_chart" style="height: 400px;"></div></div>
-        <div class="col-md-6 mb-4"><div id="source_chart" style="height: 400px;"></div></div>
+    <div class="row" style="margin-left: 8rem">
+        <div class="card col-md-5 mb-4 me-2"><div id="monthly_chart" style="height: 400px;"></div></div>
+        <div class="card col-md-5 mb-4"><div id="quarterly_chart" style="height: 400px;"></div></div>
+        <div class="card col-md-5 mb-4 me-2"><div id="yearly_chart" style="height: 400px;"></div></div>
+        <div class="card col-md-5 mb-4"><div id="source_chart" style="height: 400px;"></div></div>
     </div>
 </div>
 
@@ -16,7 +16,6 @@
     const sourceData = @json($bySource);
 
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("✅ DOM Ready");
 
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(() => {
@@ -26,7 +25,6 @@
     });
 
     function drawAllCharts() {
-        console.log("🔥 Drawing All Charts");
         drawMonthlyChart();
         drawQuarterlyChart();
         drawYearlyChart();

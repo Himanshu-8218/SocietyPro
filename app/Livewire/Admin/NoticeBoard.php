@@ -6,9 +6,10 @@ use App\Models\Notice;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Notifications\AdminNotification;
-
+use Livewire\WithPagination;
 class NoticeBoard extends Component
 {
+    use WithPagination;
     public $title, $content;
     
     public function createNotice()
@@ -37,7 +38,7 @@ class NoticeBoard extends Component
     public function render()
     {
         return view('livewire.admin.notice-board', [
-            'notices' => Notice::latest()->get(),
+            'notices' => Notice::latest()->paginate(5),
         ]);
     }
 }

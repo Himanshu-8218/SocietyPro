@@ -34,7 +34,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin/staff-management') }}">
-              <i class="nav-icon bi bi-person-gear"></i> Staff Managemnt
+              <i class="nav-icon bi bi-person-gear"></i> Staff Section
             </a>
           </li>
           <li class="nav-item">
@@ -43,25 +43,48 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin/attendence') }}">
+              <i class="nav-icon bi bi-ui-checks"></i> Attendence
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin/bill') }}">
+              <i class="nav-icon bi bi-receipt"></i> Bill
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('admin/facility/view') }}">
               <i class="nav-icon bi bi-house-gear"></i> Facilities
             </a>
           </li>
           <li class="nav-item">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <a class="nav-link mt-auto" href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    <i class="nav-icon bi bi-box-arrow-left"></i>Log Out
+            <a class="nav-link" href="{{ route('admin/visitor') }}">
+              <i class="nav-icon bi bi-people"></i> Visitor
             </a>
-            </form>
           </li>
+
         </ul>
-        
       </div>
-        <div>
+      <div>
+      <div class="dropdown-center">
+        <button class="btn btn-secondary dropdown-toggle position-absolute top-0 end-0" style="margin-right: 2rem" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle">  </i>  {{ Auth::user()->name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{{ route('admin/profile') }}"><i class="bi bi-person-fill-up ms-4">  </i>Profile</a></li>
+          <li class="dropdown-item"><form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <a href="route('logout')"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                <i class="bi bi-box-arrow-left ms-4">  </i>Log Out
+            </a>
+        </form>
+      </li>
+        </ul>
+      </div>
+
           
         </div>
       </div>

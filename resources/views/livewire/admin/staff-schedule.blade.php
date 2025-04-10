@@ -1,8 +1,9 @@
-<div class="container mt-5">
+<div class="card container mt-5">
     @if (session()->has('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
-    <h4>Assign Shift to Staff</h4>
+    <h4 class="fs-1 mt-2">Assign Shift to Staff</h4>
+    <br/>
     <div class="row">
         <div class="col-md-3">
             <label>Staff</label>
@@ -31,9 +32,9 @@
         </div>
     </div>
 
-    <hr class="my-4">
+    <hr class="my-3">
 
-<h5 class="mb-3">Scheduled Staff Shifts</h5>
+<h5 class="mb-3 fs-3">Scheduled Staff Shifts</h5>
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
         <tr>

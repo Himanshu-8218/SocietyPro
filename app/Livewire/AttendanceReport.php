@@ -23,7 +23,7 @@ class AttendanceReport extends Component
         $users=User::whereIn('usertype',['Security','Staff'])->get();
         if (Auth::user()->usertype != 'Admin') {
             $attendances = Attendance::where('user_id', Auth::id())
-                ->orderBy('date', 'desc')->get();
+                ->orderBy('date', 'desc')->paginate(5);
         } else {
             $attendances = Attendance::whereIn('usertype', ['Security', 'Staff'])
                 ->orderBy('date', 'desc')

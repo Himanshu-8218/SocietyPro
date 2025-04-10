@@ -3,9 +3,10 @@ namespace App\Livewire\Resident;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-
+use Livewire\WithPagination;
 class Notifications extends Component
 {
+    use WithPagination;
     public function markAsRead($id)
     {
         Auth::user()->notifications->find($id)->markAsRead();

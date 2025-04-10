@@ -1,8 +1,7 @@
 @include('admin.admin-nav')
 <div style="width: 87%; margin-left: 7%; margin-top: 3rem;">
-    <div class="flex">
         <div class="container">
-            <strong><h1 class="text-center mb-4">Add & View Property</h1></strong>
+            <strong><h1 class="mb-4 fs-1 text-start">PROPERTY</h1></strong>
             <div class="row justify-content-center">
                 <!-- Buildings Card -->
                 <div class="col-md-4" >
@@ -60,18 +59,7 @@
         
         
         
-    </div>
+    <strong class="fs-1">Financial Chart</strong>
     <livewire:financial-reports/>
     <br/>
-    <livewire:admin.billing-manager/>
-    <br/>
-    <livewire:admin.staff-schedule/>
-    <br/>
-    <livewire:task-assignment/>
-    <br/>
-    <livewire:attendance-manager/>
-    <br/>
-    <livewire:attendance-report/>
-    <br/>
-    <livewire:profile-management/>
 </div>

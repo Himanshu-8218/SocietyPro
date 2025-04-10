@@ -1,6 +1,6 @@
 <div class="container mt-4">
-    <div class="card p-4 shadow-sm mb-5">
-        <h4 class="mb-3">Assign Task to Maintenance Staff</h4>
+    <div class="card p-3 shadow-xl mb-5">
+        <h4 class="mb-3 fs-2">Assign Task to Maintenance Staff</h4>
 
         @if (session()->has('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
@@ -30,7 +30,7 @@
 
     {{-- TASK LIST SECTION --}}
     <div class="card p-4 shadow-sm">
-        <h4 class="mb-3">Assigned Tasks</h4>
+        <h4 class="mb-3 fs-3">Assigned Tasks</h4>
 
         <table class="table table-bordered table-hover">
             <thead class="table-light">

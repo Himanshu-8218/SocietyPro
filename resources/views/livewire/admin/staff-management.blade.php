@@ -19,7 +19,7 @@
         </a>
 
     </div>
-    <div class="container">
+    <div class="card container">
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
@@ -27,7 +27,7 @@
         </div>
     @endif
 
-    <strong><h1 class="mb-4">Staff Management</h1></strong>
+    <strong><h1 class="mb-4 mt-2">Staff Management</h1></strong>
 
     <table class="table table-bordered table-striped align-middle table-hover">
         <thead class="table-dark">

@@ -2,16 +2,16 @@
     <div class="card shadow-sm">
         <div class="card-body">
             @if(Auth::user()->usertype == 'Security' || Auth::user()->usertype == 'Staff')
-                <h3 class="card-title mb-3">
-                    Attendance Report of <strong>{{ Auth::user()->name }}</strong>
-                </h3>
+                <strong class="card-title mb-5 fs-3">
+                    Attendance Report of <strong class="fs-2">{{ Auth::user()->name }}</strong>
+                </strong>
             @else
-                <h3 class="card-title mb-3">
-                    Attendance Report of <strong>Security and Staff</strong>
-                </h3>
+                <strong class="card-title mb-5 fs-3">
+                    Attendance Report of <strong class="fs-3">Security and Staff</strong>
+                </strong>
             @endif
 
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
                 <table class="table table-bordered table-striped">
                     <thead class="table-light">
                         <tr>

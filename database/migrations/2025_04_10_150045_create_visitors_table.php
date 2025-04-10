@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('contact');
             $table->string('purpose');
+            $table->date('date');
             $table->enum('status', ['pending', 'approved', 'denied'])->default('pending');
             $table->foreignId('resident_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('approved_by')->nullable()->constrained('users')->onDelete('set null');
