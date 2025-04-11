@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Booking;
+use App\Models\Facility;
+
 class AdminManageBookings extends Component
 {
     public $bookings;
@@ -16,18 +18,21 @@ class AdminManageBookings extends Component
     public function updateStatus($id, $status)
     {
         $booking = Booking::findOrFail($id);
-        if($status=="approved")
+
+        // Adjust facility's occupied count
+        if($status==='cancelled')
         {
-            $booking->facility->occupied;
+        $facility=Facility::where('id',$booking->facility->id)->get();
+        // dd($facility);
+        $facility->first()->occupied=$facility->first()->occupied-1;
+        $facility->first()->save();
         }
-        else
-        {
-        $booking->facility->occupied--;    
+
         $booking->facility->save();
-        }
         $booking->status = $status;
         $booking->save();
-        $this->mount();
+
+        $this->mount(); // Refresh bookings list
     }
 
     public function render()
@@ -35,4 +40,3 @@ class AdminManageBookings extends Component
         return view('livewire.admin-manage-bookings');
     }
 }
-

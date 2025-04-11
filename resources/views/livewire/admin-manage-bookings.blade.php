@@ -7,7 +7,7 @@
                 <th class="px-4 py-2 border">User</th>
                 <th class="px-4 py-2 border">Facility</th>
                 <th class="px-4 py-2 border">Date</th>
-                <th class="px-4 py-2 border">Time</th>
+                <th class="px-4 py-2 border">Slot</th>
                 <th class="px-4 py-2 border">Status</th>
                 <th class="px-4 py-2 border">Action</th>
             </tr>
@@ -18,12 +18,20 @@
                     <td class="px-4 py-2 border">{{ $booking->user->name }}</td>
                     <td class="px-4 py-2 border">{{ $booking->facility->name }}</td>
                     <td class="px-4 py-2 border">{{ $booking->date }}</td>
-                    <td class="px-4 py-2 border">{{ $booking->start_time }} - {{ $booking->end_time }}</td>
+                    <td class="px-4 py-2 border">{{ $booking->slot }}</td>
                     <td class="px-4 py-2 border capitalize">{{ $booking->status }}</td>
                     <td class="px-4 py-2 border">
+                        @php
+                        $facility = \App\Models\Facility::find($booking->facility_id);
+                        @endphp
+
+                        @if($facility->total_slots > $facility->occupied )
                         @if ($booking->status === 'pending')
-                            <button wire:click="updateStatus({{ $booking->id }}, 'approved')" class="bg-green-500 text-black px-2 py-1 rounded">Approve</button>
-                            <button wire:click="updateStatus({{ $booking->id }}, 'cancelled')" class="bg-red-500 text-black px-2 py-1 rounded">Cancel</button>
+                            <button wire:click="updateStatus({{ $booking->id }}, 'approved')" class="btn btn-success px-2 py-1 rounded">Approve</button>
+                            <button wire:click="updateStatus({{ $booking->id }}, 'cancelled')" class="btn btn-danger px-2 py-1 rounded">Cancel</button>
+                        @endif
+                        @elseif($booking->status=='pending')
+                        <div class="alert alert-success">Seat Full</div>
                         @endif
                     </td>
                 </tr>

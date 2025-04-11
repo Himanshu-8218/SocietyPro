@@ -41,7 +41,7 @@ class BillingController extends Controller
             return redirect($response['links'][1]['href']);
         }
     
-        return redirect()->route('dashboard')->with('error', 'Unable to process payment.');
+        return redirect()->route('resident/bill')->with('error', 'Unable to process payment.');
     }
     
 
@@ -58,16 +58,16 @@ class BillingController extends Controller
     
         if (isset($response['status']) && $response['status'] === 'COMPLETED') {
             $bill->update(['status' => 'paid']);
-            return redirect()->route('dashboard')->with('message', 'Payment successful!');
+            return redirect()->route('resident/bill')->with('message', 'Payment successful!');
         }
     
-        return redirect()->route('dashboard')->with('error', 'Payment failed.');
+        return redirect()->route('resident/bill')->with('error', 'Payment failed.');
     }
     
 
     public function cancel()
     {
-        return redirect()->route('dashboard')->with('error', 'Payment was cancelled.');
+        return redirect()->route('resident/bill')->with('error', 'Payment was cancelled.');
     }
 
     public function downloadReceipt(Bill $bill)

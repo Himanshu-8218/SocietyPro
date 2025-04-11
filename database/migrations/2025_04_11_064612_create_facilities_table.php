@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->enum('slot', ['5am-7am', '7am-9am', '4pm-6pm', '6pm-8pm', '8pm-10pm']);
             $table->integer('total_slots')->default(10);
             $table->integer('occupied')->default(0);
             $table->timestamps();

@@ -27,6 +27,7 @@ class BillingManager extends Component
 
         session()->flash('message', 'Bill generated successfully.');
         $this->reset();
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

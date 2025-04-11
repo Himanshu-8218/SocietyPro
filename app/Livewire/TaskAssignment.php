@@ -35,6 +35,8 @@ class TaskAssignment extends Component
         session()->flash('message', 'Task assigned successfully.');
         $this->reset(['staff_id', 'task_description']);
         $this->loadTasks(); // Reload tasks after submission
+        return redirect(request()->header('Referer'));
+
     }
 
     public function loadTasks()

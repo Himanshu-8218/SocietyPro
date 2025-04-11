@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('facility_id')->constrained('facilities')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->date('date')->now();
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->date('date');
+            $table->enum('slot', ['5am-7am', '7am-9am', '4pm-6pm', '6pm-8pm', '8pm-10pm']);
             $table->enum('status', ['pending', 'approved', 'cancelled'])->default('pending');
             $table->timestamps();
         });

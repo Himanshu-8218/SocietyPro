@@ -5,26 +5,25 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Facility;
 use App\Models\Booking;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class FacilityBooking extends Component
 {
     public $facilities;
     public $selectedFacility;
-    public $date, $start_time, $end_time;
-    public $occupiedSlots = 0;
+    public $date;
     public $availableSlots = 0;
+    public $occupiedSlots = 0;
 
     public function mount()
     {
         $this->facilities = Facility::all();
     }
 
-    public function openFacility($facilityId)
+    public function openFacility($id)
     {
-        $this->selectedFacility = Facility::find($facilityId);
-        $this->reset(['date', 'start_time', 'end_time', 'occupiedSlots', 'availableSlots']);
+        $this->selectedFacility = Facility::findOrFail($id);
+        $this->reset(['date', 'availableSlots', 'occupiedSlots']);
     }
 
     public function updatedDate()
@@ -36,65 +35,51 @@ class FacilityBooking extends Component
 
     public function loadAvailability()
     {
-        $bookings = Booking::where('facility_id', $this->selectedFacility->id)
+        $this->occupiedSlots = Booking::where('facility_id', $this->selectedFacility->id)
             ->where('date', $this->date)
-            ->get();
+            ->where('slot', $this->selectedFacility->slot)
+            ->count();
 
-        $this->occupiedSlots = $bookings->count();
-        $this->availableSlots = max(0, $this->selectedFacility->total_slots - $this->occupiedSlots);
     }
 
     public function submitBooking()
     {
         $this->validate([
             'date' => 'required|date',
-            'start_time' => 'required',
-            'end_time' => 'required|after:start_time',
         ]);
 
-        // Reload availability to ensure latest data
-        $this->loadAvailability();
+        $slot = $this->selectedFacility->slot;
 
-
-
-        // Check if the selected time overlaps with any existing bookings
-        $overlapping = Booking::where('facility_id', $this->selectedFacility->id)
+        $this->occupiedSlots = Booking::where('facility_id', $this->selectedFacility->id)
             ->where('date', $this->date)
-            ->where(function ($query) {
-                $query->whereBetween('start_time', [$this->start_time, $this->end_time])
-                    ->orWhereBetween('end_time', [$this->start_time, $this->end_time])
-                    ->orWhere(function ($q) {
-                        $q->where('start_time', '<=', $this->start_time)
-                        ->where('end_time', '>=', $this->end_time);
-                    });
-            })
-            ->exists();
+            ->where('slot', $slot)
+            ->count();
 
-        if ($overlapping) {
-            session()->flash('error', 'The selected time overlaps with an existing booking.');
+        if ($this->occupiedSlots >= $this->selectedFacility->total_slots) {
+            session()->flash('error', 'No slots available for this date and time.');
             return;
         }
 
-        // Save the booking
         Booking::create([
-            'user_id'=>Auth::id(),
+            'user_id' => Auth::id(),
             'facility_id' => $this->selectedFacility->id,
             'date' => $this->date,
-            'start_time' => $this->start_time,
-            'end_time' => $this->end_time,
+            'slot' => $slot,
+            'status' => 'pending',
         ]);
-        $this->selectedFacility->occupied++;
-        $this->selectedFacility->save();
+        $facility=Facility::where('id',$this->selectedFacility->id)->get();
+        // dd($facility);
+        $facility->first()->occupied=$facility->first()->occupied+1;
+        $facility->first()->save();
 
         session()->flash('message', 'Booking successful!');
         $this->cancelSelection();
     }
 
-
     public function cancelSelection()
     {
         $this->selectedFacility = null;
-        $this->reset(['date', 'start_time', 'end_time', 'occupiedSlots', 'availableSlots']);
+        $this->reset(['date', 'availableSlots', 'occupiedSlots']);
     }
 
     public function render()

@@ -1,8 +1,8 @@
 <div class="card container mt-5">
-    @if (session()->has('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
-    @endif
     <h4 class="fs-1 mt-2">Assign Shift to Staff</h4>
+    @if (session()->has('messagestaff'))
+        <div class="alert alert-success">{{ session('messagestaff') }}</div>
+    @endif
     <br/>
     <div class="row">
         <div class="col-md-3">

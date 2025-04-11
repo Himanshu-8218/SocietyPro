@@ -1,9 +1,40 @@
-<div>
-    <div class="row" style="margin-left: 8rem">
-        <div class="card col-md-5 mb-4 me-2"><div id="monthly_chart" style="height: 400px;"></div></div>
-        <div class="card col-md-5 mb-4"><div id="quarterly_chart" style="height: 400px;"></div></div>
-        <div class="card col-md-5 mb-4 me-2"><div id="yearly_chart" style="height: 400px;"></div></div>
-        <div class="card col-md-5 mb-4"><div id="source_chart" style="height: 400px;"></div></div>
+<div class="container my-3">
+    <div class="row justify-content-center g-4">
+        <div class="col-md-6 col-xl-5">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Monthly Report</h5>
+                    <div id="monthly_chart" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-6">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Quarterly Report</h5>
+                    <div id="quarterly_chart" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-5">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Yearly Report</h5>
+                    <div id="yearly_chart" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-6">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Source Wise Report</h5>
+                    <div id="source_chart" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

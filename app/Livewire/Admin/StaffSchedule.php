@@ -32,8 +32,9 @@ class StaffSchedule extends Component
             'date' => $this->shift_date,
         ]);
 
-        session()->flash('message', 'Shift assigned successfully!');
+        session()->flash('messagestaff', 'Shift assigned successfully!');
         $this->reset(['shift_type', 'shift_date', 'selected_staff']);
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

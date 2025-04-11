@@ -40,6 +40,7 @@ class VisitorManagement extends Component
     session()->flash('message', 'Visitor Registered Successfully!');
     $this->reset(['name', 'contact', 'purpose']);
     $this->mount();
+    return redirect(request()->header('Referer'));
     }
 
 

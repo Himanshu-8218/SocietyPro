@@ -14,7 +14,7 @@ class FinancialTransactionSeeder extends Seeder
 
         foreach (range(1, 100) as $index) {
             FinancialTransaction::create([
-                'transaction_date' => Carbon::now()->subDays(rand(0, 365))->toDateString(),
+                'transaction_date' => Carbon::now()->subDays(rand(0, 1825))->toDateString(), // last 5 years
                 'amount'           => rand(1000, 5000),
                 'source'           => $sources[array_rand($sources)],
             ]);

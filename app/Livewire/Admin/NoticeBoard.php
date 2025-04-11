@@ -33,6 +33,8 @@ class NoticeBoard extends Component
 
         session()->flash('message', 'Notice created successfully.');
         $this->reset(['title', 'content']);
+        return redirect(request()->header('Referer'));
+
     }
 
     public function render()

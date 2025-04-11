@@ -1,50 +1,76 @@
-<div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded shadow">
-    <h2 class="text-xl font-semibold mb-4">Add New Facility</h2>
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg border">
+
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Facility</h2>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 text-green-700 p-2 rounded mb-4">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
             {{ session('message') }}
         </div>
     @endif
 
-    <form wire:submit.prevent="addFacility" class="mb-6">
-        <div class="mb-4">
-            <label class="block font-medium">Facility Name</label>
-            <input type="text" wire:model="name" class="w-full border rounded p-2" placeholder="e.g. Clubhouse">
-            @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-        </div>
-        <div class="mb-4">
-            <label class="block font-medium">Description</label>
-            <input type="text" wire:model="description" class="w-full border rounded p-2" placeholder="e.g. Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias id, optio, assumenda aspernatur">
-            @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    <form wire:submit.prevent="addFacility" class="space-y-5">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Facility Name</label>
+            <input type="text" wire:model="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+            @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <div class="mb-4">
-            <label class="block font-medium">Total Slots</label>
-            <input type="number" wire:model="total_slots" class="w-full border rounded p-2">
-            @error('total_slots') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <input type="text" wire:model="description" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+            @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
         </div>
 
-        <button type="submit" class="bg-blue-600 text-black px-4 py-2 rounded">Add Facility</button>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Slot</label>
+            <select wire:model="slot" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring focus:ring-blue-300">
+                <option value="">-- Select Slot --</option>
+                @foreach ($slots as $s)
+                    <option value="{{ $s }}">{{ $s }}</option>
+                @endforeach
+            </select>
+            @error('slot') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Total Slots</label>
+            <input type="number" wire:model="total_slots" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+            @error('total_slots') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success mt-2 mb-2">
+                Add Facility
+            </button>
+        </div>
     </form>
 
-    <h3 class="text-lg font-semibold mb-2">Existing Facilities</h3>
-    <table class="w-full border-collapse table-auto">
-        <thead>
-            <tr class="bg-gray-100 text-left">
-                <th class="px-4 py-2 border">Name</th>
-                <th class="px-4 py-2 border">Description</th>
-                <th class="px-4 py-2 border">Total Slots</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($facilities as $facility)
+    <h3 class="text-xl font-semibold text-gray-800 mt-10 mb-4">Existing Facilities</h3>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
                 <tr>
-                    <td class="px-4 py-2 border">{{ $facility->name }}</td>
-                    <td class="px-4 py-2 border">{{ $facility->description }}</td>
-                    <td class="px-4 py-2 border">{{ $facility->total_slots }}</td>
+                    <th class="px-4 py-3 text-left">Name</th>
+                    <th class="px-4 py-3 text-left">Description</th>
+                    <th class="px-4 py-3 text-left">Slot</th>
+                    <th class="px-4 py-3 text-left">Total Slots</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+                @forelse ($facilities as $facility)
+                    <tr>
+                        <td class="px-4 py-2">{{ $facility->name }}</td>
+                        <td class="px-4 py-2">{{ $facility->description }}</td>
+                        <td class="px-4 py-2">{{ $facility->slot }}</td>
+                        <td class="px-4 py-2">{{ $facility->total_slots }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-4 py-4 text-center text-gray-500">No facilities available.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>

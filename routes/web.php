@@ -9,14 +9,7 @@ use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\Admin\StaffManagement;
-use App\Livewire\Admin\FloorForm;
-use App\Livewire\Admin\BuildingForm;
-use App\Livewire\Admin\UnitForm;
-use App\Livewire\Admin\NoticeBoard;
 
-use App\Livewire\BillingComponent;
-
-use App\Http\Controllers\PaymentController;
 
 
 
@@ -66,8 +59,8 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin/dashboard');
     Route::get('admin/auth/register-staff',function(){return view('auth.register-staff');})->name('admin/create/staff');
     Route::get('admin/auth/register-security',function(){return view('auth.register-security');})->name('admin/create/security');
-    // Route::get('admin/register', [RegisteredUserController::class, 'create'])->name('admin/register');
-    // Route::post('admin/register', [RegisteredUserController::class, 'store_admin']);
+    Route::get('admin/register', [RegisteredUserController::class, 'create'])->name('admin/register');
+    Route::post('admin/register', [RegisteredUserController::class, 'store_admin']);
     Route::view('admin/notice-board', 'admin.notice-board')->name('admin/notice-board');
     Route::view('admin/staff-management', 'admin.staff-management')->name('admin/staff-management');
     Route::view('admin/complaint-board', 'admin.complaint-board')->name('admin/complaint-board');

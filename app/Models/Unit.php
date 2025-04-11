@@ -13,8 +13,8 @@ class Unit extends Model
         return $this->belongsTo(Floor::class);
     }
 
-    public function resident()
+    public function residents()
     {
-        return $this->belongsTo(User::class, 'resident_id');
+    return $this->hasMany(Resident::class);
     }
 }
