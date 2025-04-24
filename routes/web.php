@@ -8,15 +8,6 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Livewire\Admin\StaffManagement;
-
-
-
-
-
-
-Route::get('/users',[StaffManagement::class,'render']);
-
 
 
 Route::get('/', function () {

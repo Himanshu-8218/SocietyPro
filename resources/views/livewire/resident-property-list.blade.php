@@ -3,7 +3,7 @@
     <!-- Filter Dropdown -->
     <div class="mb-4 d-flex align-items-center gap-3">
         <label class="fw-semibold">Filter by Availability:</label>
-        <select wire:model="availability" class="form-select w-auto">
+        <select wire:model.lazy="availability" class="form-select w-auto">
             <option value="all">All</option>
             <option value="available">Available</option>
             <option value="occupied">Occupied</option>

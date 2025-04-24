@@ -13,6 +13,58 @@
     <!-- Scripts -->
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+      @media (min-width: 992px) {
+    .sidebar-narrow,
+    .sidebar-narrow-unfoldable:not(:hover) {
+      flex: 0 0 var(--cui-sidebar-narrow-width);
+      width: var(--cui-sidebar-narrow-width);
+      padding-bottom: var(--cui-sidebar-toggler-height);
+      overflow: visible;
+    }
+  
+    .sidebar-narrow .sidebar-header,
+    .sidebar-narrow-unfoldable:not(:hover) .sidebar-header {
+      justify-content: center;
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+  
+  /* Mobile: override CoreUI's sidebar hide logic */
+  @media (max-width: 991.98px) {
+    .sidebar {
+      margin-inline-start: 0 !important;
+      width: var(--cui-sidebar-narrow-width) !important;
+      flex: 0 0 var(--cui-sidebar-narrow-width) !important;
+    }
+  
+    .sidebar .sidebar-header {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    .sidebar .nav-link {
+      text-align: center;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  
+    .sidebar .nav-icon {
+      margin-right: 0;
+    }
+  
+    .sidebar .nav-title {
+      display: none; /* Optional: hide nav titles on small screen */
+   } 
+    
+   .sidebar-narrow .nav-link, .sidebar-narrow-unfoldable:not(:hover) .nav-link {
+          overflow: hidden;
+      }
+    
+  }
+      </style>
 </head>
 <body >
     <div class="sidebar sidebar-narrow-unfoldable border-end sidebar-dark">

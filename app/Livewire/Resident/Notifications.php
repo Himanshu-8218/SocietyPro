@@ -10,6 +10,7 @@ class Notifications extends Component
     public function markAsRead($id)
     {
         Auth::user()->notifications->find($id)->markAsRead();
+        return redirect(request()->header('Referer'));
     }
 
     public function render()
