@@ -8,10 +8,11 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\OcrController;
 
 
 Route::get('/', function () {
-    return view('auth.register');
+    return view('auth.login');
 });
 
 
@@ -44,6 +45,10 @@ Route::middleware(['auth', 'ResidentMiddleware'])->group(function () {
     Route::get('resident/paypal/cancel', [BillingController::class, 'cancel'])->name('resident/paypal/cancel');
     Route::get('resident/receipt/{bill}', [BillingController::class, 'downloadReceipt'])->name('resident/receipt');
     
+    // OCR Routes
+    Route::get('resident/ocr', [OcrController::class, 'showForm'])->name('ocr.form');
+    Route::post('resident/ocr', [OcrController::class, 'process'])->name('ocr.process');
+    Route::get('resident/ocr/download/{resultId}', [OcrController::class, 'downloadJson'])->name('ocr.download');
 });
 
 Route::middleware(['auth', 'AdminMiddleware'])->group(function () {

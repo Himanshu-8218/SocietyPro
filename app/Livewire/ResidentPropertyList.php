@@ -32,6 +32,7 @@ class ResidentPropertyList extends Component
         $unit->update(['status' => 'occupied']);
 
         session()->flash('success', 'Unit successfully purchased.');
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

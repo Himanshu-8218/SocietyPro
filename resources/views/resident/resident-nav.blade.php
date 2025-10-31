@@ -122,7 +122,11 @@
               <i class="nav-icon bi bi-people"></i> Visitor
             </a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('ocr.form') }}">
+              <i class="nav-icon bi bi-file-earmark-text"></i> OCR Extractor
+            </a>
+          </li>
         </ul>
       </div>
       <div>

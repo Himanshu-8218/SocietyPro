@@ -43,6 +43,7 @@ class MyUnits extends Component
         session()->flash('message', 'Unit sold successfully.');
 
         unset($this->selectedUserId[$unitId]); // Reset just that dropdown
+        return redirect(request()->header('Referer'));
 
     }
 
